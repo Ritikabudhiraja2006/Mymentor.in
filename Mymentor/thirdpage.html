@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mymentor.in - Community</title>
+    <link rel="stylesheet" href="thirdpage.css">
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Mymentor Community 🤝</h1>
+</header>
+
+<div class="container">
+
+    <!-- 🔒 Senior Query Section -->
+    <section class="query-section">
+        <h2>Senior Query Support 🎓</h2>
+        <p>Only Verified Seniors Can Answer Queries</p>
+
+        <textarea id="queryInput" placeholder="Ask your academic or life query..."></textarea>
+
+        <!-- ✅ ONLY ONE BUTTON HERE -->
+        <button onclick="goToSeniorCommunity()">
+            Submit Query
+        </button>
+
+        <div id="queryList"></div>
+    </section>
+
+    <!-- 🌟 Interest Based Community -->
+    <section class="community-section">
+        <h2>Interest Based Community 🌟</h2>
+        <p>Connect with Juniors & Seniors based on your interests</p>
+
+        <input type="text" id="interestInput"
+        placeholder="Enter your interest (e.g. Coding, UPSC, Startup)">
+
+        <!-- ✅ Join button stays here -->
+        <button onclick="goToInterestCommunity()">
+            Join
+        </button>
+
+        <div id="interestList"></div>
+    </section>
+
+</div>
+
+<script src="thirdpage.js"></script>
+</body>
+</html>
