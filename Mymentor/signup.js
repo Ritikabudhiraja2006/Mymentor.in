@@ -60,34 +60,54 @@ function verifyOTP(){
         alert("Invalid OTP. Try Again.");
     }
 }
+// let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// function submitForm() {
-
-//     // Show success message
-//     // alert("Submitted Successfully ✅");
-
-//     // Redirect after 1.5 seconds
-//     setTimeout(function() {
-//         window.location.href = "dashboard.html";
-//     }, 1500);
+// if(!emailPattern.test(email)){
+//     alert("Please enter a valid email address!");
+//     return;
 // }
-// document.querySelector("form").addEventListener("submit", function(e) {
-//     e.preventDefault();   // Stop form from refreshing
 
-//     // Show success message
-//     alert("Submitted Successfully ✅");
 
-//     // Redirect to 3rd page
-//     window.location.href = "thirdpage.html";  // change to your 3rd page file name
-// });
+function submitForm() {
 
-  function submitForm() {
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let email = document.getElementById("email").value;
+let hobby = document.getElementById("hobby").value;
+let state = document.getElementById("state").value;
+let idPhoto = document.getElementById("idPhoto").files[0];
 
-    // Show success message
-    document.getElementById("successMessage").style.display = "block";
+if(!name || !phone || !email || !hobby || !state || !idPhoto){
+    alert("Please fill all the fields!");
+    return;
+}
 
-    // Redirect after 2 seconds
-    setTimeout(function() {
-        window.location.href = "thirdpage.html";   // 👈 your 3rd page file name
-    }, 2000);
+// mark form as submitted
+sessionStorage.setItem("formSubmitted", "true");
+
+// show success message
+document.getElementById("successMessage").style.display = "block";
+
+// move to next page
+setTimeout(function() {
+    window.location.href = "thirdpage.html";
+}, 2000);
+
+}
+window.onload = function(){
+
+if(sessionStorage.getItem("formSubmitted") === "true"){
+
+document.getElementById("name").value = "";
+document.getElementById("phone").value = "";
+document.getElementById("email").value = "";
+document.getElementById("hobby").value = "";
+document.getElementById("state").value = "";
+document.getElementById("idPhoto").value = "";
+
+// remove flag
+sessionStorage.removeItem("formSubmitted");
+
+}
+
 }

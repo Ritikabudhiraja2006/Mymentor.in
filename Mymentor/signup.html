@@ -14,54 +14,44 @@
     <!-- FORM SECTION -->
     <div id="form-section">
         <h2>Student Identity Verification</h2>
+        <form id="signupForm" autocomplete="off"
         <div class="form-group">
                   <label>Full Name</label>
-                  <input type="text">
+                  <input type="text" id="name">
         </div>
        <div class="form-group">
            <label>Phone Number</label>
-           <input type="text">
+           <input type="text" id="phone">
        </div>
         
        <div class="form-group">
         <label>Email ID</label>
-        <input type="email">
+        <input type="email" id="email" required>
         </div>
-        <!-- <p id="successMessage">
-    Submitted Successfully ✅
-</p> -->
 
-        <!-- <label>College/School ID Card</label>
-        <input type="text"> -->
 
          <div class="form-group">
         <label>Upload Student ID Card</label>
-        <input type="file">
+        <input type="file" id="idPhoto">
          </div>
 
           <div class="form-group">
            <label>Personal Essence(Hobbies/interest)</label>
-           <input type="text">
+           <input type="text" id="hobby">
            </div>
-        <!-- Preview Area -->
-        <!-- <img id="preview" style="display:none; width:100%; margin-top:10px; border-radius:8px;">
-
-        <p id="scan-status"></p> -->
+    
 
            <div class="form-group">
         <label>State/Location</label>
-        <input type="text">
+        <input type="text" id="state">
           </div>
+          
+          </form>
 
         <button onclick="submitForm()">Submit</button>
     </div>
 
-    <!-- OTP SECTION -->
-    <!-- <div id="otp-section" style="display:none;">
-        <h2>Enter OTP</h2>
-        <input type="text" id="otpInput" placeholder="Enter 6-digit OTP">
-        <button onclick="verifyOTP()">Verify & Enter</button>
-    </div> -->
+ 
 
 </div>
 

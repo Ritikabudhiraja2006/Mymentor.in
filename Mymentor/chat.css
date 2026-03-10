@@ -1,11 +1,11 @@
 body {
     margin: 0;
     font-family: Arial;
-    background: #e5ddd5;
+    background: #e3f2fd;   /* Light Blue Background */
 }
 
 header {
-    background: #075e54;
+    background: #1565c0;   /* Blue Header */
     color: white;
     padding: 15px;
     text-align: center;
@@ -28,28 +28,33 @@ header {
 
 .junior {
     align-self: flex-end;
-    background: #dcf8c6;
+    background: #1976d2;   /* Dark Blue Bubble */
+    color: white;
 }
 
 .senior {
     align-self: flex-start;
-    background: white;
+    background: #bbdefb;   /* Light Blue Bubble */
 }
 
 .input-area {
     display: flex;
     padding: 10px;
-    background: white;
+    background: #e3f2fd;   /* Light Blue Input Area */
 }
 
 .input-area input {
     flex: 1;
     padding: 10px;
+    border: 1px solid #90caf9;
+    border-radius: 5px;
 }
 
 .input-area button {
     padding: 10px 20px;
-    background: #075e54;
+    background: #1565c0;   /* Blue Button */
     color: white;
     border: none;
+    border-radius: 5px;
+    margin-left: 10px;
 }
