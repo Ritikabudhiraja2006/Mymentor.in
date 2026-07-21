@@ -1,113 +1,115 @@
-let generatedOTP;
+document.addEventListener("DOMContentLoaded", function () {
+    let phoneInput = document.getElementById("phone");
+    let phoneError = document.getElementById("phoneError");
 
-function scanID() {
+    // Live phone number format check as typing
+    if (phoneInput) {
+        phoneInput.addEventListener("input", function () {
+            let phone = this.value.trim();
+            let phonePattern = /^[6-9]\d{9}$/;
 
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-    let email = document.getElementById("email").value;
-    let studentId = document.getElementById("studentId").value;
+            if (phone.length === 10 && !phonePattern.test(phone)) {
+                phoneError.style.display = "block";
+                phoneError.innerText = "Please enter a valid 10-digit phone number";
+            } else {
+                phoneError.style.display = "none";
+            }
+        });
+    }
+});
+
+function submitForm() {
+    // 1. Get Elements & Values
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let hobby = document.getElementById("hobby").value.trim();
+    let state = document.getElementById("state").value.trim();
     let idPhoto = document.getElementById("idPhoto").files[0];
-    let state = document.getElementById("state").value;
 
-    if(!name || !phone || !email || !studentId || !idPhoto || !state){
-        alert("All fields including ID card photo are required!");
-        return;
+    // Get Error Elements
+    let nameError = document.getElementById("nameError");
+    let phoneError = document.getElementById("phoneError");
+    let emailError = document.getElementById("emailError");
+    let fileError = document.getElementById("fileError");
+    let hobbyError = document.getElementById("hobbyError");
+    let stateError = document.getElementById("stateError");
+
+    // Reset all error messages
+    let allErrors = document.querySelectorAll(".error-text");
+    allErrors.forEach(err => err.style.display = "none");
+
+    let isValid = true;
+
+    // Validate Full Name
+    if (!name) {
+        nameError.style.display = "block";
+        nameError.innerText = "Full Name is required";
+        isValid = false;
     }
 
-    // Preview Image
-    let reader = new FileReader();
-    reader.onload = function(e){
-        document.getElementById("preview").src = e.target.result;
-        document.getElementById("preview").style.display = "block";
+    // Validate Phone Number
+    let phonePattern = /^[6-9]\d{9}$/;
+    if (!phone || !phonePattern.test(phone)) {
+        phoneError.style.display = "block";
+        phoneError.innerText = "Enter a valid 10-digit mobile number";
+        isValid = false;
     }
-    reader.readAsDataURL(idPhoto);
 
-    let status = document.getElementById("scan-status");
-    status.innerHTML = "🔍 Scanning ID Card...";
+    // Validate Email ID
+    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let invalidDomains = ["example.com", "test.com", "fake.com", "temp.com"];
+    let emailDomain = email.split("@")[1]?.toLowerCase();
 
-    // Simulate scanning delay
-    setTimeout(function(){
+    if (!email || !emailPattern.test(email) || invalidDomains.includes(emailDomain)) {
+        emailError.style.display = "block";
+        emailError.innerText = "Please enter a valid active email address";
+        isValid = false;
+    }
 
-        // Simple format validation (example rule)
-        let idPattern = /^[A-Z]{2}[0-9]{4}$/;
+    // Validate ID File Upload
+    if (!idPhoto) {
+        fileError.style.display = "block";
+        fileError.innerText = "Please upload your Student ID Card";
+        isValid = false;
+    }
 
-        if(idPattern.test(studentId)){
-            status.innerHTML = "✅ ID Card Verified Successfully";
+    // Validate Hobbies
+    if (!hobby) {
+        hobbyError.style.display = "block";
+        hobbyError.innerText = "This field is required";
+        isValid = false;
+    }
 
-            // Generate OTP
-            generatedOTP = Math.floor(100000 + Math.random() * 900000);
-            alert("Demo OTP Sent: " + generatedOTP);
+    // Validate State
+    if (!state) {
+        stateError.style.display = "block";
+        stateError.innerText = "This field is required";
+        isValid = false;
+    }
 
-            document.getElementById("form-section").style.display = "none";
-            document.getElementById("otp-section").style.display = "block";
+    // Stop if any field failed validation
+    if (!isValid) return;
 
-        } else {
-            status.innerHTML = "❌ Invalid Student ID Format";
-        }
+    // If all inputs are valid -> Show Success Toast
+    let msgBox = document.getElementById("successMessage");
+    if (msgBox) {
+        msgBox.style.display = "block";
+    }
 
+    sessionStorage.setItem("formSubmitted", "true");
+
+    // Redirect after 2 seconds
+    setTimeout(function () {
+        window.location.href = "thirdpage.html";
     }, 2000);
 }
 
-
-function verifyOTP(){
-
-    let userOTP = document.getElementById("otpInput").value;
-
-    if(userOTP == generatedOTP){
-        alert("🎉 Verification Successful! Welcome to Mymentor.in");
-        window.location.href = "home.html";
-    } else {
-        alert("Invalid OTP. Try Again.");
+// Clear form on reload
+window.onload = function () {
+    if (sessionStorage.getItem("formSubmitted") === "true") {
+        let form = document.getElementById("signupForm");
+        if (form) form.reset();
+        sessionStorage.removeItem("formSubmitted");
     }
-}
-// let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-// if(!emailPattern.test(email)){
-//     alert("Please enter a valid email address!");
-//     return;
-// }
-
-
-function submitForm() {
-
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let email = document.getElementById("email").value;
-let hobby = document.getElementById("hobby").value;
-let state = document.getElementById("state").value;
-let idPhoto = document.getElementById("idPhoto").files[0];
-
-if(!name || !phone || !email || !hobby || !state || !idPhoto){
-    alert("Please fill all the fields!");
-    return;
-}
-
-// mark form as submitted
-sessionStorage.setItem("formSubmitted", "true");
-
-// show success message
-document.getElementById("successMessage").style.display = "block";
-
-// move to next page
-setTimeout(function() {
-    window.location.href = "thirdpage.html";
-}, 2000);
-
-}
-window.onload = function(){
-
-if(sessionStorage.getItem("formSubmitted") === "true"){
-
-document.getElementById("name").value = "";
-document.getElementById("phone").value = "";
-document.getElementById("email").value = "";
-document.getElementById("hobby").value = "";
-document.getElementById("state").value = "";
-document.getElementById("idPhoto").value = "";
-
-// remove flag
-sessionStorage.removeItem("formSubmitted");
-
-}
-
-}
+};

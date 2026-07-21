@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #eef5ff;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-    background: #e8f1f5;
+    background: white;
     padding: 25px;
     width: 360px;
     border-radius: 12px;
@@ -67,18 +67,49 @@ input[type="file"]{
 .form-group{
     margin-bottom: 10px;
 }
+
+/* Ensure the parent container is relative so the pop-up positions inside it */
+#form-section, .container {
+    position: relative; 
+}
+
+/* Floating Top Pop-up Banner */
+/* Floating Top-Right Notification Toast */
 .success-message {
     display: none;
     position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #d4edda;
-    background-color: whitesmoke;
-    
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
+    top: 25px;
+    right: 25px;
+    background-color: #10B981;             /* Modern emerald green */
+    color: #ffffff;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+    z-index: 10000;                        /* Sits on top of everything */
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Smooth Slide-In Animation */
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* High-Contrast Error Text */
+.error-text {
+    display: none;                  /* Hidden until JS activates it */
+    color: #dc2626;                 /* Bold red color */
+    font-size: 13px;
+    font-weight: 600;               /* Semi-bold so it stands out */
+    margin-top: 6px;
+    margin-bottom: 2px;
+    letter-spacing: 0.2px;
 }
