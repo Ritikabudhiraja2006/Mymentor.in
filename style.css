@@ -19,7 +19,7 @@ body {
     text-align: center;
  
     /* Eye comfort gradient background */
-    background: linear-gradient(135deg, #e8f1f5);
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
 }
 
 /* Main Container */
